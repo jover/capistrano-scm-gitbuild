@@ -26,13 +26,13 @@ Or install it yourself as:
 
 ## Usage
 
-Tell Capistrano to use the GitBuild deploy strategy like so:
+Tell Capistrano to use the GitBuild deploy strategy, in `deploy.rb` like so:
 ```ruby
 # Copy strategy
 set :scm, :gitbuild
 ```
 
-To deploy a subdirectory instead of the full root of the project, you can of course use `:repo_tree` which is supported by default in Capistrano.
+To deploy a subdirectory instead of the full root of the project, you can of course use `:repo_tree` which is supported by default in Capistrano, in `deploy.rb` like so:
 ```ruby
 # Deploy subdirectory
 set :repo_tree, 'project'

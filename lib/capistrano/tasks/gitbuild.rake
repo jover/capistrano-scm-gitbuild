@@ -21,7 +21,7 @@ namespace :gitbuild do
   end
 
   desc 'Check that the repository is reachable'
-  task check: :'git:wrapper' do
+  task check: :'gitbuild:wrapper' do
     fetch(:branch)
     on release_roles :all do
       with fetch(:git_environmental_variables) do
@@ -31,7 +31,7 @@ namespace :gitbuild do
   end
 
   desc 'Clone the repo to the cache'
-  task clone: :'git:wrapper' do
+  task clone: :'gitbuild:wrapper' do
     on release_roles :all do
       if strategy.test
         info t(:mirror_exists, at: repo_path)
@@ -46,7 +46,7 @@ namespace :gitbuild do
   end
 
   desc 'Update the repo mirror to reflect the origin state'
-  task update: :'git:clone' do
+  task update: :'gitbuild:clone' do
     on release_roles :all do
       within repo_path do
         with fetch(:git_environmental_variables) do
@@ -57,7 +57,7 @@ namespace :gitbuild do
   end
 
   desc 'Copy repo to releases'
-  task create_release: :'git:update' do
+  task create_release: :'gitbuild:update' do
     on release_roles :all do
       with fetch(:git_environmental_variables) do
         within repo_path do

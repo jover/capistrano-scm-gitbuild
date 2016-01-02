@@ -1,7 +1,7 @@
 load File.expand_path('../tasks/gitbuild.rake', __FILE__)
 
 require "capistrano/scm"
-require "capsitrano/gitbuild/version"
+require "capistrano/gitbuild/version"
 
 class Capistrano::GitBuild < Capistrano::SCM
 

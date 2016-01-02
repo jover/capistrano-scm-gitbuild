@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'capsitrano/gitbuild/version'
+require 'capistrano/gitbuild/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "capsitrano-scm-gitbuild"
-  spec.version       = Capsitrano::Gitbuild::VERSION
+  spec.name          = "capistrano-scm-gitbuild"
+  spec.version       = Capistrano::Gitbuild::VERSION
   spec.authors       = ["Jochen Verdeyen"]
   spec.email         = ["jochenverdeyen@gmail.com"]
 
   spec.summary       = %q{GitBuild strategy for Capistrano 3}
   spec.description   = %q{Capistrano 3 build and copy strategy for git (checkout branch, apply build steps and deploy to server)}
-  spec.homepage      = "https://github.com/jover/capsitrano-scm-gitbuild"
+  spec.homepage      = "https://github.com/jover/capistrano-scm-gitbuild"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or

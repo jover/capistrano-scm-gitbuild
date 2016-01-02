@@ -3,7 +3,9 @@
 A Capistrano 3.x deploy strategy.
 
 The idea behind this strategy is to checkout the Git repository in a temporary directory first, on the local machine (the one which started the deploy task).
+
 Hereafter, custom build tasks can be implemented on the checkout code (e.g. compile your static site with [Jekyll](http://jekyllrb.com/), compile [SASS](http://sass-lang.com/) or import some external modules using [Composer](https://getcomposer.org/) for your project or anything else).
+
 Finally, the code will be archived in a tarball, uploaded to the servers and extracted in the release directory like normal.
 
 ## Installation
@@ -25,24 +27,27 @@ Or install it yourself as:
 ## Usage
 
 Tell Capistrano to use the GitBuild deploy strategy like so:
-
-	$ # Copy strategy
-	$ set :scm, :gitbuild
+```ruby
+# Copy strategy
+set :scm, :gitbuild
+```
 
 To deploy a subdirectory instead of the full root of the project, you can of course use `:repo_tree` which is supported by default in Capistrano.
-	
-	$ # Deploy subdirectory
-	$ set :repo_tree, 'project'
+```ruby
+# Deploy subdirectory
+set :repo_tree, 'project'
+```
 
 To implement your own build logic before the tarball is created and uploaded to the servers, you must implement the `gitbuild:build` task like so:
-
-	$ namespace :gitbuild do
-  	$   task :build do
-    $     run_locally do
-    $       # Implement custom build logic.
-    $     end
-	$   end
-	$ end
+```ruby
+namespace :gitbuild do
+  task :build do
+    run_locally do
+      # Implement custom build logic.
+    end
+  end
+end
+```
 
 When you deploy, the repository will be checked out first in a temporary directory (locally - on the machine which started the deploy task).
 After that you have the ability to implement custom build tasks.

@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'capsitrano/scm/gitbuild/version'
+require 'capsitrano/gitbuild/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "capsitrano-scm-gitbuild"
-  spec.version       = Capsitrano::Scm::Gitbuild::VERSION
+  spec.version       = Capsitrano::Gitbuild::VERSION
   spec.authors       = ["Jochen Verdeyen"]
-  spec.email         = ["jochen.verdeyen@amplexor.com"]
+  spec.email         = ["jochenverdeyen@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{GitBuild strategy for Capistrano 3}
+  spec.description   = %q{Capistrano 3 build and copy strategy for git (checkout branch, apply build steps and deploy to server)}
+  spec.homepage      = "https://github.com/jover/capsitrano-scm-gitbuild"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
@@ -26,6 +26,8 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
+
+  spec.add_dependency 'capistrano', '~> 3.0'
 
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.0"

@@ -3,6 +3,8 @@ load File.expand_path('../tasks/gitbuild.rake', __FILE__)
 require "capistrano/scm"
 require "capistrano/gitbuild/version"
 
+set_if_empty :repo_path, -> { "#{fetch(:tmp_dir)}/#{fetch(:application)}-repo" }
+
 class Capistrano::GitBuild < Capistrano::SCM
 
   # execute git with argument in the context
@@ -38,13 +40,25 @@ class Capistrano::GitBuild < Capistrano::SCM
       end
     end
 
+    def local_build_path
+      "#{fetch(:repo_path)}"
+    end
+
+    def local_tarfile
+      "#{fetch(:tmp_dir)}/#{fetch(:application)}-#{fetch(:current_revision).strip}.tar.gz"
+    end
+
+    def remote_tarfile
+      "#{fetch(:tmp_dir)}/#{fetch(:application)}-#{fetch(:current_revision).strip}.tar.gz"
+    end
+
     def release
       if (tree = fetch(:repo_tree))
         tree = tree.slice %r#^/?(.*?)/?$#, 1
         components = tree.split('/').size
-        git :archive, fetch(:branch), tree, "| tar -x --strip-components #{components} -f - -C", release_path
+        git :archive, fetch(:branch), tree, "| tar -x --strip-components #{components} -f - -C", local_build_path
       else
-        git :archive, fetch(:branch), '| tar -x -f - -C', release_path
+        git :archive, fetch(:branch), '| tar -x -f - -C', local_build_path
       end
     end
 
